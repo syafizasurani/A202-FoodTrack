@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Touring Holic',
+      title: 'Food Track',
       home: SplashScreen(),
     );
   }

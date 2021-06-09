@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stiw2044a202.foodtrack">
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
    <application
+        android:requestLegacyExternalStorage="true"
         android:label="foodtrack"
         android:icon="@mipmap/ic_launcher">
         <activity
