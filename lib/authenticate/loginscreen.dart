@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:foodtrack/registrationscreen.dart';
+import 'package:foodtrack/authenticate/registrationscreen.dart';
 import 'package:foodtrack/user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-import 'mainscreen.dart';
+import 'package:foodtrack/mainscreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
  

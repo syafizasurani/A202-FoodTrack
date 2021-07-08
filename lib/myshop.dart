@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:foodtrack/newproduct.dart';
 import 'package:foodtrack/user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ndialog/ndialog.dart';
 
 class MyShop extends StatefulWidget {
   final User user;
@@ -31,9 +33,10 @@ class _MyShopState extends State<MyShop> {
     screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Colors.lightBlue[50],
       appBar: AppBar(
         backgroundColor: Color(0xff2171cc),
-        title: Text('My Product',
+        title: Text('My Shop',
         style: GoogleFonts.openSans(color: Colors.white, fontWeight: FontWeight.bold)),
       ),
       body: Center(
@@ -47,7 +50,7 @@ class _MyShopState extends State<MyShop> {
               : Flexible(
                 child: Center(child:GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio: (screenWidth / screenHeight) / 0.793,
+                  childAspectRatio: (screenWidth / screenHeight) / 0.8,
                   children:
                     List.generate(_userProductList.length, (index) {
                       return Padding(
@@ -98,10 +101,12 @@ class _MyShopState extends State<MyShop> {
                                   width: double.infinity,
                                   height: 45,
                                   child: ElevatedButton(
-                                    onPressed: () => {}, 
+                                    onPressed: () => {
+                                      _deleteProductDialog(index),
+                                    }, 
                                     style: ElevatedButton.styleFrom(primary: Colors.white60),
-                                    child: Text("Edit Product",
-                                    style: GoogleFonts.openSans(color: Colors.black54, fontSize: 16, fontWeight: FontWeight.bold)
+                                    child: Text("Delete",
+                                    style: GoogleFonts.openSans(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold)
                                     ),
                                   ),
                                 ),
@@ -145,6 +150,89 @@ class _MyShopState extends State<MyShop> {
             print(_userProductList);
           });
         }
+      }
+    );
+  }
+
+  _deleteProductDialog(int index) {
+    showDialog(
+      builder: (context) => new AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0))
+        ),
+        title: new Text('Delete ' + _userProductList[index]['prname'] + ' ?',
+          style: GoogleFonts.openSans(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.bold
+          ),
+        ),
+      actions: <Widget>[
+        TextButton(
+          child: Text("No",
+            style: GoogleFonts.openSans(
+              color: Colors.red,
+              fontSize: 18,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          }
+        ),
+        TextButton(
+          child: Text("Yes",
+            style: GoogleFonts.openSans(
+              color: Color(0xff2171cc),
+              fontSize: 18,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+            _deleteProduct(index);
+          },
+        ),
+      ]),
+      context: context
+    );
+  }
+
+  Future <void> _deleteProduct(int index) async {
+    ProgressDialog progressDialog = ProgressDialog(context,
+      message: Text("Remove this product"), title: Text("Progress..."));
+    progressDialog.show();
+    await Future.delayed(Duration(seconds: 1));
+    http.post(
+      Uri.parse("http://crimsonwebs.com/s271304/foodtrack/php/deleteproduct.php"),
+      body: {
+        "email": widget.user.email, 
+        "prid": _userProductList[index]['prid'],
+        }).then((response){
+        if (response.body == "success") {
+          Fluttertoast.showToast(
+            msg: "Product Successfully Removed",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.grey[300],
+            textColor: Colors.black,
+            fontSize: 18.0,
+          );
+          _loadProducts();
+        } 
+        else {
+          Fluttertoast.showToast(
+            msg: "Failed",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.redAccent,
+            textColor: Colors.white,
+            fontSize: 18.0
+          );
+        }
+        progressDialog.dismiss();
       }
     );
   }

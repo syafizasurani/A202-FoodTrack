@@ -42,13 +42,14 @@ class _NewProductState extends State<NewProduct> {
             padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
             child: SingleChildScrollView(
               child: Column(children: [
+                SizedBox(height:10),
                 GestureDetector(
                   onTap: ()=>{
                     _onPictureSelectionDialog()
                   },
                   child: Container(
-                    height:screenHeight/3.5,
-                    width:screenWidth/1.8,
+                    height:screenHeight/3.8,
+                    width:screenWidth/2,
                     decoration: BoxDecoration(
                       image:DecorationImage(
                         image: _image == null ? AssetImage(pathAsset) : FileImage(_image),
@@ -64,80 +65,141 @@ class _NewProductState extends State<NewProduct> {
                 ),
                 SizedBox(height: 5),
                 Text("Tap to add image"),
-                SizedBox(height: 10),
-                TextField(
-                  keyboardType: TextInputType.name,
-                  controller: _prnameController,
-                  style: GoogleFonts.openSans(
-                    fontSize: 16.5,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: "Enter product name",
-                    filled: true,
-                    fillColor: Color(0x662171cc),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintStyle: GoogleFonts.openSans(
-                    color: Colors.black54, fontWeight: FontWeight.bold),
+                SizedBox(height: 20),
+                Container( 
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: [
+                      Text("Product Name:",
+                        style: GoogleFonts.openSans(
+                          fontSize: 16, fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  keyboardType: TextInputType.name,
-                  controller: _prtypeController,
-                  style: GoogleFonts.openSans(
-                    fontSize: 16.5,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: "Enter product type",
-                    filled: true,
-                    fillColor: Color(0x662171cc),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none,
+                SizedBox(height: 8),
+                Container( 
+                  //height: 55,
+                  child: TextField(
+                    keyboardType: TextInputType.name,
+                    controller: _prnameController,
+                    style: GoogleFonts.openSans(
+                      fontSize: 16.5,
                     ),
-                    hintStyle: GoogleFonts.openSans(
-                    color: Colors.black54, fontWeight: FontWeight.bold),
+                    decoration: InputDecoration(
+                      hintText: "Enter product name",
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintStyle: GoogleFonts.openSans(
+                      color: Colors.black54, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  keyboardType: TextInputType.number,
-                  controller: _prpriceController,
-                  style: GoogleFonts.openSans(
-                    fontSize: 16.5,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: "Enter price (RM)",
-                    filled: true,
-                    fillColor: Color(0x662171cc),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintStyle: GoogleFonts.openSans(
-                    color: Colors.black54, fontWeight: FontWeight.bold),
+                SizedBox(height: 20),
+                Container( 
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: [
+                      Text("Product Type:",
+                        style: GoogleFonts.openSans(
+                          fontSize: 16, fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  keyboardType: TextInputType.number,
-                  controller: _prqtyController,
-                  style: GoogleFonts.openSans(
-                    fontSize: 16.5,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: "Enter quantity",
-                    filled: true,
-                    fillColor: Color(0x662171cc),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none,
+                SizedBox(height: 8),
+                Container( 
+                  child: TextField(
+                    keyboardType: TextInputType.name,
+                    controller: _prtypeController,
+                    style: GoogleFonts.openSans(
+                      fontSize: 16.5,
                     ),
-                    hintStyle: GoogleFonts.openSans(
-                    color: Colors.black54, fontWeight: FontWeight.bold),
+                    decoration: InputDecoration(
+                      hintText: "Enter product type",
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintStyle: GoogleFonts.openSans(
+                      color: Colors.black54, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container( 
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: [
+                      Text("Price (RM):",
+                        style: GoogleFonts.openSans(
+                          fontSize: 16, fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container( 
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: _prpriceController,
+                    style: GoogleFonts.openSans(
+                      fontSize: 16.5,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: "Enter price (RM)",
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintStyle: GoogleFonts.openSans(
+                      color: Colors.black54, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container( 
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: [
+                      Text("Quantity:",
+                        style: GoogleFonts.openSans(
+                          fontSize: 16, fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container( 
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: _prqtyController,
+                    style: GoogleFonts.openSans(
+                      fontSize: 16.5,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: "Enter quantity",
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintStyle: GoogleFonts.openSans(
+                      color: Colors.black54, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -159,6 +221,7 @@ class _NewProductState extends State<NewProduct> {
                       fontSize: 18),),
                   ),
                 ),
+                SizedBox(height: 10),
               ],),
             ),
           ),

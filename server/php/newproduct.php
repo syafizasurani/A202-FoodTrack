@@ -1,7 +1,7 @@
 <?php
 include_once("dbconnect.php");
-$user_email= $_POST['email'];
-$prname= $_POST['prname'];
+$user_email = $_POST['email'];
+$prname = $_POST['prname'];
 $prtype = $_POST['prtype'];
 $prprice = $_POST['prprice'];
 $prqty = $_POST['prqty'];

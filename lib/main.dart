@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'splashscreen.dart';
+import 'package:foodtrack/authenticate/splashscreen.dart';
 
 void main() => runApp(MyApp());
  
